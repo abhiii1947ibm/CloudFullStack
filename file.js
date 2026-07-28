@@ -1,12 +1,12 @@
-const fs = require("fs");
+// const fs = require("fs");
 
 
 // ================== Read File ==================
 
-// Synchronous
+// Synchronous (blocking)
 // fs.writeFileSync("./test.txt", "Hello World!");
 
-// Asynchronous
+// Asynchronous (non blocking)
 // fs.writeFile("./test.txt", "Hello World Async", (err) => {});
 
 // =================== Write File =================
@@ -71,3 +71,44 @@ const fs = require("fs");
 // fs.mkdirSync("myDocs"); // create a folder named myDocs
 
 // fs.mkdirSync("myDocss/a/b", {recursive: true}); // create a folder named myDocss and then a and then b and c under folder
+
+
+// ========================= Blocking / Non Blocking ==============================
+
+// ======= Blocking ========
+
+// const fs = require("fs");
+// console.log("1");
+// const res = fs.readFileSync("./contacts.txt", "utf-8");
+// console.log(res);
+// console.log("2");
+// output:
+// 1
+// Abhishek: +919876543210
+// Ajay: +919876512345
+// 2
+
+// ======= Non Blocking ========
+
+// const fs = require("fs");
+// console.log("1");
+// fs.readFile("./contacts.txt", "utf-8", (err, res) => {
+//     console.log(res);
+// }); // it expect callback in which we have error and result
+// console.log("2");
+// output:
+// 1
+// 2
+// Abhishek: +919876543210
+// Ajay: +919876512345
+
+
+// Default thread pool size = 4
+// if we want to increase the size of thread pool so we can increase till the number of cores present in the system
+
+const os = require("os");
+
+console.log(os.cpus().length); // 8 (no. of cpus) (so we can increase the size of thread pool till 8)
+
+
+// =====================================================
